@@ -1,0 +1,45 @@
+<!doctype html>
+<html  ng-app="myApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+	<script src="controllers.js"></script>
+  </head>
+  <body>
+  <h1>Last.FM API Test</h1>
+
+  <div ng-include src="'iso3116-countries.html'"></div>
+  
+  <div class="container-fluid">
+  
+  
+  
+<div ng-controller="customersCtrl"> 
+
+	<table>
+	<thead>
+	<tr>
+	<td>Name</td>
+	<td>Country</td>
+	</tr>
+	</thead>
+
+	<tbody>
+	<tr ng-repeat="x in artists| filter : paginate">
+		<td>{{ x.name }}</td>
+		<td>{{ x.listeners }}</td>
+	</tr>
+	</tbody>
+	
+</table>
+        <pagination total-items="totalItems" ng-model="currentPage"
+          max-size="5" boundary-links="true"
+          items-per-page="numPerPage" class="pagination-sm">
+        </pagination>
+  </div>
+  </div>
+
+</html>
