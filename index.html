@@ -3,43 +3,42 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+	 <link rel="stylesheet" type="text/css" href="main.css">   
+ <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway" />
-    <link rel="stylesheet" type="text/css" href="main.css">
+   
 	<script src="controllers.js"></script>
   </head>
   <body>
-  <h1>Last.FM API Test</h1>
+  <h1>Last.FM API Test!</h1>
 
-  <div ng-include src="'iso3116-countries.html'"></div>
-  
-  <div class="container-fluid">
-  
-  
-  
-<div ng-controller="customersCtrl"> 
+<div ng-controller="artistsCtl">
 
-	<table>
+ Country: <select name="countrySelect" id="countrySelect" ng-model="data.country" ng-change="countryChanged(data.country)">
+	<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>		
+</select>
+
+	<table class="table table-striped table-condensed table-hover">
 	<thead>
 	<tr>
 	<td>Name</td>
-	<td>Country</td>
+	<td>Listeners</td>
 	</tr>
 	</thead>
-
-	<tbody>
-	<tr ng-repeat="x in artists| filter : paginate">
+        <tfoot>
+        	<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5"/>
+        </tfoot>
+   	<tbody>
+	<tr ng-repeat="x in artists">
 		<td>{{ x.name }}</td>
 		<td>{{ x.listeners }}</td>
 	</tr>
 	</tbody>
+
 	
 </table>
-        <pagination total-items="totalItems" ng-model="currentPage"
-          max-size="5" boundary-links="true"
-          items-per-page="numPerPage" class="pagination-sm">
-        </pagination>
-  </div>
-  </div>
 
+
+</div>
 </html>

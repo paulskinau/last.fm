@@ -1,6 +1,6 @@
 {
-"countries":[
-{"name":"Afghanistan"},
+"countries": {
+"country":[{"name":"Afghanistan"},
 {"name":"Åland Islands"},
 {"name":"Albania"},
 {"name":"Algeria"},
@@ -248,7 +248,6 @@
 {"name":"Western Sahara"},
 {"name":"Yemen"},
 {"name":"Zambia"},
-{"name":"Zimbabwe"}
-]
+{"name":"Zimbabwe"}]}
 }
 
