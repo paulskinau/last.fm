@@ -1,1 +1,1 @@
-var app = angular.module('lastFMApp', []);
+var app = angular.module('lastfmApp', []);
