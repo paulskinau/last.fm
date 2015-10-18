@@ -13,6 +13,7 @@ Bugs
 - Not all countries from the "ISO 3166-1 country names standard" seem to work with the last.fm server. For now the code displays a "not supported error". See controller.js for countries that are not supported.
 - Last.fm is currently not giving out API keys due to a bug on their site. The link to request a key redirects to their homepage. I used a key I found online. 
 - The Last.FM API reports more than 4920430 pages for Australia, but the API rejects a page parameter higher than  1000000
+- The Last.FM API returns no results for high page numbers. The code displays an appropriate message to the end user.
 
 Installation
 --------------
