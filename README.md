@@ -21,7 +21,7 @@ Installation
 - Php Version:	PHP Version 5.5.9-1ubuntu4.13
 - Web Server: Apache 2.4.7-1ubuntu4.7
 	
-Simply checkout the code to an appropriate server folder on the server. Limit external acceess 
+Simply checkout the code to an appropriate server folder on the server. Limit external acceess to confic.inc 
 
 External Modules
 --------------
