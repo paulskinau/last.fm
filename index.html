@@ -21,7 +21,7 @@
 
  Country: <select name="countrySelect" id="countrySelect" ng-model="country" ng-change="countryChanged()">
 	<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>		
-</select>
+</select><br/>
 
 <div ng-show="artists && artists.length > 0">
 
@@ -32,9 +32,6 @@
 	<td>Listeners</td>
 	</tr>
 	</thead>
-        <tfoot>
-        	<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5"/>
-        </tfoot>
    	<tbody>
 	<tr ng-repeat="x in artists">
 		<td>{{ x.name }}</td>
@@ -44,6 +41,8 @@
 
 	
 </table>
+
+ <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5"/>
 </div>
 
 <h5>
