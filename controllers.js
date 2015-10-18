@@ -40,8 +40,8 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
                     $scope.totalItems = response.topartists['@attr'].total;
                 }
 
-                if ($scope.totalItems > 1000) {
-                    $scope.totalItems = 500;
+                if ($scope.totalItems > 1000000 *5) {
+                    $scope.totalItems = 1000000 *5 -5;
                 }
              
 
