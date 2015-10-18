@@ -43,7 +43,6 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
                 if ($scope.totalItems > 1000000 *5) {
                     $scope.totalItems = 1000000 *5 -5;
                 }
-             
 
                 if (response.error) {
                     $scope.errorCode = "LFM123" + response.error;
@@ -58,6 +57,14 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
                     $scope.loadStatus = null;
                     return;
                 }
+
+				if (response.topartists && response.topartists.artist.length == 0 && response.topartists['@attr'].totalPages > $scope.currentPage) 
+					{
+						$scope.artists = null;
+						$scope.loadStatus = "Last.fm could not load this page " + $scope.currentPage + ". Try browsing to a lower page number.";
+						return;
+					}
+                
 				
 				if (response.topartists && response.topartists.artist && response.topartists.artist.length == 0) {
                     // last.fm api is buggy... it often returns too many results. It seems to handle the page and limit incorrectly. 	
