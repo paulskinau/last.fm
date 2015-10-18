@@ -23,9 +23,9 @@
 	<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>		
 </select><br/>
 
-<div ng-show="artists && artists.length > 0">
 
-	<table class="table table-striped table-condensed table-hover">
+<div id="container">
+	<table class="table table-striped table-condensed table-hover" ng-show="artists && artists.length > 0" id="results">
 	<thead>
 	<tr>
 	<td>Name</td>
@@ -38,16 +38,21 @@
 		<td>{{ x.listeners }}</td>
 	</tr>
 	</tbody>
-
-	
 </table>
 
- <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5"/>
-</div>
-
+<div id="loading">
 <h5>
 {{ loadStatus }}
 </h5>
+</div>
+</div>	
+
+<pre>Page: {{currentPage}} / {{numPages}}</pre>
+ <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5" max-size="10" boundary-links="true" rotate="false" num-pages="numPages"/>
+ 
+ 
+
+
 
 
 </div>

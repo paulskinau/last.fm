@@ -1,6 +1,6 @@
 var app = angular.module('lastfmApp', ['ui.bootstrap']);
 
-app.controller('artistsCtl', function($scope, $http, $window) {
+app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
 
     $http.get('iso3116-countries.json')
         .success(function(response) {
@@ -18,37 +18,35 @@ app.controller('artistsCtl', function($scope, $http, $window) {
     $scope.artists = [];
     $scope.countries = [];
 
-
+	
     function getArtists() {
 
         $scope.artists = null;
         $scope.loadStatus = "Loading from last.fm....";
-        var encCountry = $window.encodeURIComponent($scope.country);
-        console.log(encCountry);
-
+		
         //$http.get("http://ws.audioscrobbler.com/2.0/?method=geo.getTopArtists&limit=5&page=" + $scope.currentPage + "&country=" + encCountry + "&api_key=a0ed2629d3d28606f67d7214c916788d&format=json")
 
-        $http.get("server.php?limit=5&page=" + $scope.currentPage + "&country=" + encCountry)
+		
+	$http( { method: 'GET', url: 'server.php', params: { limit : 5, page: $scope.currentPage, country: $scope.country }, cache: true })
 
-        .success(function(response) {
-
-                if (response.topartists && response.topartists['@attr']) {
+        .success(function(response, status, headers, config) {
+            // if we flip through the country list quickly there may be a previous requests with a country name different to the current $scope.country
+			//  lets not display anything from an old stale query
+			if (config.params.country != $scope.country && config.params.page != $scope.currentPage)
+				{
+                    return;
+				}
+                		
+                if (response.topartists && response.topartists['@attr'] && response.topartists['@attr'].total > 0) {
                     $scope.totalItems = response.topartists['@attr'].total;
                 }
 
-                if ($scope.totalItems > 100) {
-                    $scope.totalItems = 50;
+                if ($scope.totalItems > 1000) {
+                    $scope.totalItems = 500;
                 }
-
-                if ($scope.totalItems == 0 && response.topartists['@attr']) {
-                    // if we flip through the country list quickly there may be a previous requests with a country name different to the current $scope.country
-                    $scope.loadStatus = "No results for " + response.topartists['@attr'].country;
-                    $scope.artists = null;
-                    return;
-                }
+             
 
                 if (response.error) {
-                    //$scope.loadStatus = "Error from server. Error : " + response.message + ". If this error persists please contact support@support.com and quote error 123" + response.error;
                     $scope.errorCode = "LFM123" + response.error;
                     $scope.artists = null;
                     return;
@@ -59,6 +57,13 @@ app.controller('artistsCtl', function($scope, $http, $window) {
                     // last.fm api is buggy... it often returns too many results. It seems to handle the page and limit incorrectly. 	
                     $scope.artists = response.topartists.artist.slice(Math.max(response.topartists.artist.length - 5, 0));
                     $scope.loadStatus = null;
+                    return;
+                }
+				
+				if (response.topartists && response.topartists.artist && response.topartists.artist.length == 0) {
+                    // last.fm api is buggy... it often returns too many results. It seems to handle the page and limit incorrectly. 	
+                    $scope.artists = null;
+                    $scope.loadStatus = "No results were found for " + $scope.country;
                     return;
                 }
 
@@ -97,6 +102,8 @@ app.controller('artistsCtl', function($scope, $http, $window) {
                 }
         }
 
+		$scope.currentPage = 1;
+		$scope.totalItems = 0;
         getArtists();
     }
 

@@ -23,6 +23,18 @@ Installation
 	
 Simply checkout the code to an appropriate server folder on the server. Limit external acceess to confic.inc 
 
+Test Environment
+--------------
+
+Tested in:
+
+- Chrome (Version 46.0.2490.71 m) on Windows 10
+- Ipad Mini (Chrome Emulator)
+- Samsung Galaxy S4 (Chrome Emulator)
+- Firefox 41.0.1 on Windows 10
+- Responsive Design View (Firefox 41.0.1 on Windows 10)
+
+
 External Modules
 --------------
 
