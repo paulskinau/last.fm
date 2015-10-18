@@ -24,15 +24,14 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
         $scope.artists = null;
         $scope.loadStatus = "Loading from last.fm....";
 		
-        //$http.get("http://ws.audioscrobbler.com/2.0/?method=geo.getTopArtists&limit=5&page=" + $scope.currentPage + "&country=" + encCountry + "&api_key=a0ed2629d3d28606f67d7214c916788d&format=json")
-
+		var encCountry = encodeURI($scope.country);
 		
-	$http( { method: 'GET', url: 'server.php', params: { limit : 5, page: $scope.currentPage, country: $scope.country }, cache: true })
+	$http( { method: 'GET', url: 'server.php', params: { limit : 5, page: $scope.currentPage, country: encCountry }, cache: true })
 
         .success(function(response, status, headers, config) {
             // if we flip through the country list quickly there may be a previous requests with a country name different to the current $scope.country
 			//  lets not display anything from an old stale query
-			if (config.params.country != $scope.country && config.params.page != $scope.currentPage)
+			if (config.params.country != encodeURI($scope.country) && config.params.page != $scope.currentPage)
 				{
                     return;
 				}
