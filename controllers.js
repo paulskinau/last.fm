@@ -76,6 +76,8 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
 				if (response.topartists && response.topartists.artist && response.topartists.artist.length == 0) {
                     // last.fm api is buggy... it often returns too many results. It seems to handle the page and limit incorrectly. 	
                     $scope.artists = null;
+					$scope.currentPage = 1;
+					$scope.totalItems = 0;
                     $scope.loadStatus = "No results were found for " + $scope.country;
                     return;
                 }
@@ -86,6 +88,8 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
             })
             .error(function(data, status, headers, config) {
                 $scope.loadStatus = "Error communicating with server. If this error persists, please contact support@support.com and quote error LFM122";
+				$scope.currentPage = 1;
+				$scope.totalItems = 0;
                 $scope.artists = null;
 
             })
