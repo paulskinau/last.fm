@@ -42,7 +42,14 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
 
                 if ($scope.totalItems > 1000000 *5) {
                     $scope.totalItems = 1000000 *5 -5;
+					$scope.hasMore = true;
                 }
+				else
+				{
+					$scope.hasMore = false;
+				}
+				
+				
 
                 if (response.error) {
                     $scope.errorCode = "LFM123" + response.error;

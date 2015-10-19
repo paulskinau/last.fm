@@ -47,7 +47,8 @@
 </div>
 </div>	
 
-<pre>Page: {{currentPage}} / {{numPages}}</pre>
+<pre>Page: {{currentPage}} / {{numPages}} <span ng-show="hasMore">  Note: there are more {{numPages}} pages of results, but the last.fm API only supports up to 999999 pages</span></pre>
+ 
  <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5" max-size="10" boundary-links="true" rotate="false" num-pages="numPages"/>
  
  
