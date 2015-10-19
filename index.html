@@ -42,7 +42,12 @@
 
 <div id="loading">
 <h5>
-{{ loadStatus }}
+<div 
+    ng-switch on="loadStatus">
+      <div ng-switch-when="CouldNotLoad">Last.fm could not load this page {{currentPage}}.  Try browsing to a lower page number.</div>
+      <div ng-switch-when="NoResults">No results were found for {{country}}</div>
+      <div ng-switch-when="CommunicationError">Error communicating with server. If this error persists, please contact support@support.com and quote error LFM122</div>
+  </div>
 </h5>
 </div>
 </div>	
@@ -51,11 +56,6 @@
  
  <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="5" max-size="10" boundary-links="true" rotate="false" num-pages="numPages"/>
  
- 
-
-
-
-
 </div>
 
 <div ng-show="errorCode && errorCode.length > 0">

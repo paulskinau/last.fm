@@ -68,7 +68,8 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
 				if (response.topartists && response.topartists.artist.length == 0 && response.topartists['@attr'].totalPages > $scope.currentPage) 
 					{
 						$scope.artists = null;
-						$scope.loadStatus = "Last.fm could not load this page " + $scope.currentPage + ". Try browsing to a lower page number.";
+						//$scope.loadStatus = "Last.fm could not load this page " + $scope.currentPage + ". Try browsing to a lower page number.";
+						$scope.loadStatus = "CouldNotLoad";
 						return;
 					}
                 
@@ -78,7 +79,8 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
                     $scope.artists = null;
 					$scope.currentPage = 1;
 					$scope.totalItems = 0;
-                    $scope.loadStatus = "No results were found for " + $scope.country;
+                    //$scope.loadStatus = "No results were found for " + $scope.country;
+					$scope.loadStatus = "NoResults";
                     return;
                 }
 
