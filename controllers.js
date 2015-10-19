@@ -110,7 +110,9 @@ app.controller('artistsCtl', function($scope, $http, $window, $cacheFactory) {
             case "R\xE9union":
                 {
                     $scope.artists = null;
+					$scope.totalItems = 0;
                     $scope.loadStatus = $scope.country + " is not supported at this time.";
+					$scope.hasMore = false;
                     return;
                 }
         }
